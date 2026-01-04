@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\ProgramController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +19,13 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::post('/tokens/create', [AuthController::class, 'createToken']);
     Route::get('/tokens', [AuthController::class, 'tokens']);
     Route::delete('/tokens/{id}', [AuthController::class, 'revokeToken']);
+
+    Route::get('/programs', [ProgramController::class, 'index']);
+    Route::patch('/programs/{program}/is-active', [ProgramController::class, 'updateIsActive']);
+
+    Route::get('/departments', [DepartmentController::class, 'index']);
+    Route::patch('/departments/{department}/is-active', [DepartmentController::class, 'updateIsActive']);
+
+    Route::get('/courses', [CourseController::class, 'index']);
+    Route::patch('/courses/{course}/is-active', [CourseController::class, 'updateIsActive']);
 });
