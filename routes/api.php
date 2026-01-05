@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\SemesterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +16,10 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+// Public routes
+Route::get('/public/dropdowns', [PublicController::class, 'getDropdownData']);
+Route::post('/admissions', [AdmissionController::class, 'store']);
 
 Route::middleware('auth:sanctum')->group(function (): void {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -31,4 +37,6 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::patch('/courses/{course}/is-active', [CourseController::class, 'updateIsActive']);
 
     Route::apiResource('semesters', SemesterController::class);
+
+    Route::get('/admissions', [AdmissionController::class, 'index']);
 });
