@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\SemesterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,6 @@ Route::middleware('auth:sanctum')->group(function (): void {
 
     Route::get('/courses', [CourseController::class, 'index']);
     Route::patch('/courses/{course}/is-active', [CourseController::class, 'updateIsActive']);
+
+    Route::apiResource('semesters', SemesterController::class);
 });
