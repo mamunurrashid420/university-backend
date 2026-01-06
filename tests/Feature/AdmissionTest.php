@@ -4,7 +4,10 @@ use App\Models\Admission;
 use App\Models\Department;
 use App\Models\Program;
 use App\Models\Semester;
+use App\Models\User;
 
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
 test('can submit admission form with required fields', function () {
@@ -243,4 +246,66 @@ test('validates Honors GPA range when provided', function () {
 
     $response->assertUnprocessable()
         ->assertJsonValidationErrors(['honors_gpa']);
+});
+
+test('can retrieve single admission form data', function () {
+    $user = User::factory()->create();
+    $semester = Semester::factory()->active()->create();
+    $department = Department::factory()->create();
+    $program = Program::factory()->create(['department_id' => $department->id]);
+
+    $admission = Admission::factory()->create([
+        'semester_id' => $semester->id,
+        'department_id' => $department->id,
+        'program_id' => $program->id,
+        'full_name' => 'Jane Doe',
+        'email' => 'jane@example.com',
+    ]);
+
+    $response = actingAs($user, 'sanctum')
+        ->getJson("/api/admissions/{$admission->id}");
+
+    $response->assertSuccessful()
+        ->assertJsonStructure([
+            'id',
+            'semester_id',
+            'department_id',
+            'program_id',
+            'full_name',
+            'phone_number',
+            'email',
+            'semester' => ['id', 'name', 'year'],
+            'department' => ['id', 'name', 'code'],
+            'program' => ['id', 'name', 'code'],
+        ])
+        ->assertJson([
+            'id' => $admission->id,
+            'full_name' => 'Jane Doe',
+            'email' => 'jane@example.com',
+        ]);
+});
+
+test('returns 404 for non-existent admission', function () {
+    $user = User::factory()->create();
+
+    $response = actingAs($user, 'sanctum')
+        ->getJson('/api/admissions/99999');
+
+    $response->assertNotFound();
+});
+
+test('requires authentication to retrieve admission', function () {
+    $semester = Semester::factory()->active()->create();
+    $department = Department::factory()->create();
+    $program = Program::factory()->create(['department_id' => $department->id]);
+
+    $admission = Admission::factory()->create([
+        'semester_id' => $semester->id,
+        'department_id' => $department->id,
+        'program_id' => $program->id,
+    ]);
+
+    $response = getJson("/api/admissions/{$admission->id}");
+
+    $response->assertUnauthorized();
 });

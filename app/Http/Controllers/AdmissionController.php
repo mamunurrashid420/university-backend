@@ -35,4 +35,9 @@ class AdmissionController extends Controller
             'admission' => $admission->load(['semester', 'department', 'program']),
         ], 201);
     }
+
+    public function show(Admission $admission): JsonResponse
+    {
+        return response()->json($admission->load(['semester', 'department', 'program']));
+    }
 }

@@ -39,4 +39,5 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::apiResource('semesters', SemesterController::class);
 
     Route::get('/admissions', [AdmissionController::class, 'index']);
+    Route::get('/admissions/{admission}', [AdmissionController::class, 'show']);
 });
