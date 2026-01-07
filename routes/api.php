@@ -14,12 +14,13 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+// Authentication routes with rate limiting
+Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:auth');
+Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:auth');
 
-// Public routes
-Route::get('/public/dropdowns', [PublicController::class, 'getDropdownData']);
-Route::post('/admissions', [AdmissionController::class, 'store']);
+// Public routes with rate limiting
+Route::get('/public/dropdowns', [PublicController::class, 'getDropdownData'])->middleware('throttle:public-dropdowns');
+Route::post('/admissions', [AdmissionController::class, 'store'])->middleware('throttle:admissions');
 
 Route::middleware('auth:sanctum')->group(function (): void {
     Route::post('/logout', [AuthController::class, 'logout']);
