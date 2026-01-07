@@ -15,22 +15,14 @@ class SemesterSeeder extends Seeder
      */
     public function run(): void
     {
-        $currentYear = (int) date('Y');
-        $years = range($currentYear - 2, $currentYear + 2);
-        $semesterNames = ['Spring', 'Summer', 'Fall'];
-
-        foreach ($years as $year) {
-            foreach ($semesterNames as $name) {
-                Semester::updateOrCreate(
-                    [
-                        'name' => $name,
-                        'year' => $year,
-                    ],
-                    [
-                        'is_active' => true,
-                    ]
-                );
-            }
-        }
+        Semester::updateOrCreate(
+            [
+                'name' => 'Spring',
+                'year' => 2026,
+            ],
+            [
+                'is_active' => true,
+            ]
+        );
     }
 }
