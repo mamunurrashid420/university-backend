@@ -26,7 +26,7 @@ class Program extends Model
     protected function casts(): array
     {
         return [
-            'duration_years' => 'integer',
+            'duration_years' => 'float',
             'total_credits' => 'integer',
             'is_active' => 'boolean',
         ];

@@ -30,7 +30,6 @@ return new class extends Migration
             $table->string('ssc_roll');
             $table->string('ssc_registration_no');
             $table->decimal('ssc_gpa', 3, 2);
-            $table->string('ssc_grade')->nullable();
             $table->string('ssc_board')->nullable();
             $table->unsignedSmallInteger('ssc_passing_year')->nullable();
 
@@ -38,16 +37,11 @@ return new class extends Migration
             $table->string('hsc_roll')->nullable();
             $table->string('hsc_registration_no')->nullable();
             $table->decimal('hsc_gpa', 3, 2)->nullable();
-            $table->string('hsc_grade')->nullable();
             $table->string('hsc_board')->nullable();
             $table->unsignedSmallInteger('hsc_passing_year')->nullable();
 
             // Honors Results
-            $table->string('honors_roll')->nullable();
-            $table->string('honors_registration_no')->nullable();
             $table->decimal('honors_gpa', 3, 2)->nullable();
-            $table->string('honors_grade')->nullable();
-            $table->string('honors_board')->nullable();
             $table->unsignedSmallInteger('honors_passing_year')->nullable();
             $table->string('honors_institution')->nullable();
 

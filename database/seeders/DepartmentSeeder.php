@@ -21,8 +21,15 @@ class DepartmentSeeder extends Seeder
             ['code' => 'CSE', 'name' => 'CSE'],
             ['code' => 'FD', 'name' => 'Fashion Design'],
             ['code' => 'AM', 'name' => 'Apparel Manufacturers'],
-            ['code' => 'THM', 'name' => 'Tourism & Hospitality Management'],
-            ['code' => 'ECE', 'name' => 'Electronics & Communication Engineering'],
+            ['code' => 'TE', 'name' => 'Textile Engineering'],
+            ['code' => 'EE', 'name' => 'Electrical Engineering'],
+            ['code' => 'SCM', 'name' => 'Supply Chain Management'],
+            ['code' => 'IE', 'name' => 'Industrial Engineering'],
+            ['code' => 'GD', 'name' => 'Graphics Design'],
+            ['code' => 'DM', 'name' => 'Digital Marketing'],
+            ['code' => 'AHCC', 'name' => 'Air Hostess & Cabin Crew'],
+            ['code' => 'CAD', 'name' => 'Auto CAD'],
+            ['code' => 'QMS', 'name' => 'Quality Management'],
         ];
 
         foreach ($departments as $dept) {

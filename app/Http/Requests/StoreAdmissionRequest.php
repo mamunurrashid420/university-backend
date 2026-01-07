@@ -43,7 +43,6 @@ class StoreAdmissionRequest extends FormRequest
             'ssc_roll' => ['required', 'string', 'max:50'],
             'ssc_registration_no' => ['required', 'string', 'max:50'],
             'ssc_gpa' => ['required', 'numeric', 'min:0', 'max:5'],
-            'ssc_grade' => ['nullable', 'string', 'max:10'],
             'ssc_board' => ['nullable', 'string', 'max:100'],
             'ssc_passing_year' => ['nullable', 'integer'],
 
@@ -51,16 +50,11 @@ class StoreAdmissionRequest extends FormRequest
             'hsc_roll' => ['nullable', 'string', 'max:50'],
             'hsc_registration_no' => ['nullable', 'string', 'max:50'],
             'hsc_gpa' => ['nullable', 'numeric', 'min:0', 'max:5'],
-            'hsc_grade' => ['nullable', 'string', 'max:10'],
             'hsc_board' => ['nullable', 'string', 'max:100'],
             'hsc_passing_year' => ['nullable', 'integer'],
 
             // Honors Results (optional)
-            'honors_roll' => ['nullable', 'string', 'max:50'],
-            'honors_registration_no' => ['nullable', 'string', 'max:50'],
             'honors_gpa' => ['nullable', 'numeric', 'min:0', 'max:4'],
-            'honors_grade' => ['nullable', 'string', 'max:50'],
-            'honors_board' => ['nullable', 'string', 'max:100'],
             'honors_passing_year' => ['nullable', 'integer'],
             'honors_institution' => ['nullable', 'string', 'max:255'],
         ];
