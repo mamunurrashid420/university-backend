@@ -12,8 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Use Redis for rate limiting if available, otherwise use default
-        if (config('cache.default') === 'redis') {
+        // Use Redis for rate limiting if CACHE_DRIVER is set to redis
+        $cacheDriver = getenv('CACHE_DRIVER') ?: ($_ENV['CACHE_DRIVER'] ?? $_SERVER['CACHE_DRIVER'] ?? null);
+        if ($cacheDriver === 'redis') {
             $middleware->throttleWithRedis();
         }
     })
