@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProgramController;
@@ -21,6 +22,7 @@ Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:au
 // Public routes with rate limiting
 Route::get('/public/dropdowns', [PublicController::class, 'getDropdownData'])->middleware('throttle:public-dropdowns');
 Route::post('/admissions', [AdmissionController::class, 'store'])->middleware('throttle:admissions');
+Route::post('/public/certificates/verify', [CertificateController::class, 'verify'])->middleware('throttle:60,1');
 
 Route::middleware('auth:sanctum')->group(function (): void {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -41,4 +43,6 @@ Route::middleware('auth:sanctum')->group(function (): void {
 
     Route::get('/admissions', [AdmissionController::class, 'index']);
     Route::get('/admissions/{admission}', [AdmissionController::class, 'show']);
+
+    Route::apiResource('certificates', CertificateController::class);
 });
