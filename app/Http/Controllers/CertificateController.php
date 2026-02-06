@@ -99,6 +99,8 @@ class CertificateController extends Controller
 
         return response()->json([
             'name' => $certificate->name,
+            'father_name' => $certificate->father_name,
+            'mother_name' => $certificate->mother_name,
             'roll' => $certificate->roll,
             'registration_number' => $certificate->registration_number,
             'program' => $certificate->program,

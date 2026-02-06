@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('registration_number')->index();
             $table->unsignedSmallInteger('passing_year')->index();
             $table->string('name');
+            $table->string('father_name')->nullable();
+            $table->string('mother_name')->nullable();
             $table->string('program');
             $table->string('batch')->nullable();
             $table->string('session')->nullable();

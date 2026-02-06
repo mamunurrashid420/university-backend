@@ -15,6 +15,8 @@ class Certificate extends Model
         'registration_number',
         'passing_year',
         'name',
+        'father_name',
+        'mother_name',
         'program',
         'batch',
         'session',

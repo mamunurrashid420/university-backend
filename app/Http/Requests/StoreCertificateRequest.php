@@ -37,6 +37,8 @@ class StoreCertificateRequest extends FormRequest
                 }),
             ],
             'name' => ['required', 'string', 'max:255'],
+            'father_name' => ['nullable', 'string', 'max:255'],
+            'mother_name' => ['nullable', 'string', 'max:255'],
             'program' => ['required', 'string', 'max:255'],
             'batch' => ['nullable', 'string', 'max:255'],
             'session' => ['nullable', 'string', 'max:255'],
